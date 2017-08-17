@@ -1,37 +1,25 @@
 ## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/kengqiangxia/kengqiangxia.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+重度地理爱好者，毕业于[地理信息系统GIS](https://zh.wikipedia.org/wiki/%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F)专业。现在是一名GISer，同时也是一名撰稿人。
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+自己在知乎上开了两个小专栏：
 
-### Markdown
+[《地图看世界》](https://zhuanlan.zhihu.com/mapworld)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+主要内容普及地理知识，适合所有人阅读。
+
+[《GIS开发从入门到放弃》](https://zhuanlan.zhihu.com/GISDevelop)
+
+主要内容记录GIS开发小总结，适合GIS开发初学者阅读。
+
+### 地理有什么好研究的？
+
+地理学第一定律 Tobler's First Law
 
 ```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+Everything is related to everything else, but near things are more related than distant things.
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kengqiangxia/kengqiangxia.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+短短的一个相近即相似，足够撑起我们GIS理论的半壁江山。
