@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="leaflet1.0.1.css" />
+  <!--<link rel="stylesheet" type="text/css" href="control.css" />-->
+  <!--<link rel="stylesheet" type="text/css" href="singleCSS/bootstrap.min.css" />-->
+  <!--<script src="js/ScriptList.js" type="text/javascript" charset="utf-8"></script>
+		<script src="leaflet-bing-layer.js"></script>
+		<script src="leaflet-TDT-layer.js"></script>-->
+  <script src="compassengine.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="TileLayer.GeoJSON.js"></script>
+  <script src="leaflet-geosever-layer.js"></script>
+
+  <style>
+    html,
+    body,
+    #map {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #button {
+      position: absolute;
+      z-index: 1000;
+      right: 20px;
+      top: 20px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <div id="button">
+    <button type="button" class="btn btn-success" onclick="addTIANMap()">天地图</button>
+    <button type="button" class="btn btn-success" onclick="addOSMMap()">OSM</button>
+    <button type="button" class="btn btn-success" onclick="addBingMap()">BingMap</button>
+    <button type="button" class="btn btn-success" onclick="addgeoSever()">geoSever</button>
+  </div>
+</body>
+<script type="text/javascript">
+  var map = new L.Map('map', {
+    language: 'cn'
+  });
+  map.initSeManage({
+    url: "http://172.16.100.216:8080",
+  });
+  map.setUserKey('fa4b48b4c2f1596439bcf9a089928f06');
+
+  function addTIANMap() {
+    //	    	var wmts1 = new L.TileLayer.WMTS("http://t0.tianditu.com/vec_c/wmts", {
+    //		        layer: "vec",
+    //		        tilematrixSet: "c",
+    //		        format: "tiles",
+    //		        noWrap: true
+    //		    });
+    //		    var wmts1 = new L.TileLayer.WMTS('',{
+    //		        layer: "vec",
+    //		        tilematrixSet: "c",
+    //		        format: "tiles",
+    //		        noWrap: true,
+    //		        urls:["http://t0.tianditu.com/vec_c/wmts","http://t1.tianditu.com/vec_c/wmts","http://t2.tianditu.com/vec_c/wmts"]
+    //		       
+    //		    });
+    var wmts = L.tileLayer.tdtlayer({
+      layer: 'img',
+      tdtcrs: 'EPSG:3857'
+    });
+    map.addLayer(wmts);
+    //          map.addLayer(wmts1);
+    map.setView([31.096, 121.2423], 8);
+  }
+
+  function addOSMMap() {
+    var osmUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      osm = L.tileLayer(osmUrl);
+    map.addLayer(osm);
+    map.setView([51.505, -0.09], 13);
+  }
+
+  function addBingMap() {
+    var BING_KEY = 'AkGbxXx6tDWf1swIhPJyoAVp06H0s0gDTYslNWWHZ6RoPqMpB9ld5FY1WutX8UoF';
+    var bingLayer = L.tileLayer.bing({
+      bingMapsKey: BING_KEY,
+      imagerySet: 'AerialWithLabels'
+    });
+    map.addLayer(bingLayer);
+    map.setView([51.505, -0.09], 13);
+  }
+
+  function addgeoSever() {
+    loadStyle();
+    // L.HttpRequest.ajax('style.json', 'get', null, true, loadStyle);
+  }
+
+  function loadStyle(data) {
+    var geojsonURL =
+      'http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=tiger:poly_landmarks&STYLE=&TILEMATRIX=EPSG:4326:{z}&TILEMATRIXSET=EPSG:4326&FORMAT=application/json;type=geojson&TILECOL={x}&TILEROW={y}';
+    //				    	var geojsonURL = 'http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=tiger:poi&STYLE=&TILEMATRIX=EPSG:4326:{z}&TILEMATRIXSET=EPSG:4326&FORMAT=application/json;type=geojson&TILECOL={x}&TILEROW={y}';
+    // var geojsonURL = 'http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=tiger:tiger_roads&STYLE=&TILEMATRIX=EPSG:4326:{z}&TILEMATRIXSET=EPSG:4326&FORMAT=application/json;type=geojson&TILECOL={x}&TILEROW={y}';
+    // var geojsonURL =
+    //   'http://localhost:8080/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=spearfish&STYLE=&TILEMATRIX=EPSG:4326:{z}&TILEMATRIXSET=EPSG:4326&FORMAT=application/json;type=geojson&TILECOL={x}&TILEROW={y}';
+    var wmts = new L.tileLayer.geoserver(geojsonURL, {
+      //   style: data
+    });
+    map.addLayer(wmts);
+    map.setView([40.7373046875, -73.9599609375], 10);
+    // map.setView([44.44484710693594, -103.7497329711914], 10);
+  }
+
+</script>
+
+</html>
